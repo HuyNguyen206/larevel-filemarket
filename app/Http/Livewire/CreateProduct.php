@@ -14,6 +14,14 @@ class CreateProduct extends Component
         'live' => null,
         'slug' => null
     ];
+
+    protected $rules = [
+        'state.title' => 'required|max:255',
+        'state.description' => 'required|max:1000',
+        'state.price' => 'required|numeric'
+    ];
+
+
     public function render()
     {
         return view('livewire.create-product');
@@ -21,6 +29,8 @@ class CreateProduct extends Component
 
     public function create()
     {
+        $this->validate();
+
 
     }
 

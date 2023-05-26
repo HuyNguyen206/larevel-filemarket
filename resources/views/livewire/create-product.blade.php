@@ -15,17 +15,15 @@
                                   type="text"
                     />
 
-                    <x-input-error :messages="$errors->get('title')" class="mt-2"/>
+                    <x-input-error :messages="$errors->get('state.title')" class="mt-2"/>
                 </div>
 
                 <div class="mt-4">
                     <x-input-label for="slug" :value="__('Slug')"/>
 
-                    <x-text-input readonly wire:model.lazy="state.slug" id="slug" class="block mt-1 w-full"
+                    <x-text-input readonly wire:model="state.slug" id="slug" class="block mt-1 w-full"
                                   type="text"
                     />
-
-                    <x-input-error :messages="$errors->get('slug')" class="mt-2"/>
                 </div>
 
                 <div class="mt-4">
@@ -33,7 +31,7 @@
 
                     <x-textarea-input wire:model.lazy="state.description" id="description" class="block mt-1 w-full"></x-textarea-input>
 
-                    <x-input-error :messages="$errors->get('description')" class="mt-2"/>
+                    <x-input-error :messages="$errors->get('state.description')" class="mt-2"/>
                 </div>
 
                 <div class="mt-4">
@@ -43,7 +41,7 @@
                                   type="number"
                     />
 
-                    <x-input-error :messages="$errors->get('price')" class="mt-2"/>
+                    <x-input-error :messages="$errors->get('state.price')" class="mt-2"/>
                 </div>
 
                 <div class="block mt-4">
