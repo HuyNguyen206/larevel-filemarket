@@ -1,5 +1,5 @@
 <div class="bg-white p-8">
-    <form wire:submit.prevent="create">
+    <form wire:submit.prevent="update">
         <section>
             <header class="text-xl font-bold">
                 Product information
@@ -66,6 +66,11 @@
                                   type="file" multiple
                     />
                     <ul class="my-2">
+                        @foreach($existingFiles as $existFile)
+                            <li>
+                                {{$existFile->name}} <span class="inline-block ml-2 text-red-700 cursor-pointer" wire:click="removeExistFile({{$existFile->id}})">&times;</span>
+                            </li>
+                        @endforeach
                         @foreach($files as $index => $file)
                             <li>
                                 {{$file->getClientOriginalName()}} <span class="inline-block ml-2 text-red-700 cursor-pointer" wire:click="removeFile({{$index}})">&times;</span>
@@ -78,7 +83,7 @@
         </section>
 
         <x-primary-button>
-            {{ __('Create product') }}
+            {{ __('Update product') }}
         </x-primary-button>
 
     </form>

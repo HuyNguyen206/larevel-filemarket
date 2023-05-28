@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid md:grid-cols-3  grid-cols-1 gap-6">
             @foreach($products as $product)
-            <a href="" class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex justify-center items-center h-44">
+            <a href="{{route('products.edit', $product->slug)}}" class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex justify-center items-center h-44">
                 <div class="p-6 text-gray-900">
                         {{$product->title}}
                 </div>

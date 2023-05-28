@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('', \App\Http\Controllers\HomeController::class);
+Route::domain('{user:subdomain}'.config('app.subdomain'))->name('subdomain.')->group(function () {
+   Route::get('', [\App\Http\Controllers\Subdomain\SubdomainHomeController::class, 'show']);
+});
+
+Route::get('', \App\Http\Controllers\HomeController::class)->middleware('auth');
 Route::get('onboard', [\App\Http\Controllers\OnboardingStripeController::class, 'index'])
     ->middleware('auth', \App\Http\Middleware\RedirectIfStripeAccountEnableAlready::class)->name('onboard');
 Route::get('onboard/redirect', [\App\Http\Controllers\OnboardingStripeController::class, 'redirect'])->middleware('auth')->name('onboard.redirect');
@@ -29,6 +33,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)->middleware(['verified'])->name('dashboard');
         Route::get('products', [\App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
         Route::get('products/create', [\App\Http\Controllers\ProductController::class, 'create'])->name('products.create');
+        Route::get('products/{product:slug}/edit', [\App\Http\Controllers\ProductController::class, 'edit'])->name('products.edit');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

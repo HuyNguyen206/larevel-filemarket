@@ -47,6 +47,14 @@
             @endif
         </div>
 
+        <div>
+            <x-input-label for="subdomain" :value="__('Subdomain')" />
+            <div class="flex items-center space-x-2">
+                <x-text-input id="subdomain" name="subdomain" type="text" class="mt-1 block w-full" :value="old('subdomain', $user->subdomain)" required /><span class="flex-shrink-0">{{config('app.subdomain')}}</span>
+            </div>
+            <x-input-error class="mt-2" :messages="$errors->get('subdomain')" />
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
