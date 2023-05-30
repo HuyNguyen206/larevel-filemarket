@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Subdomain;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\User;
-use Symfony\Component\HttpFoundation\Response;
 
 class SubdomainHomeController extends Controller
 {
@@ -22,9 +21,11 @@ class SubdomainHomeController extends Controller
 //            abort(Response::HTTP_FORBIDDEN, 'You can not access this product which belong to another user/subdomain');
 //        }
 
-        if (!$product->live) {
-            abort(Response::HTTP_NOT_FOUND);
-        }
+//        if (!$product->live) {
+//            abort(Response::HTTP_NOT_FOUND);
+//        }
+
+        $this->authorize('view', $product);
 
         return view('subdomain.show', compact('product', 'user'));
     }
