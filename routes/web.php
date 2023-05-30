@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::domain('{user:subdomain}'.config('app.subdomain'))->name('subdomain.')->group(function () {
-   Route::get('', [\App\Http\Controllers\Subdomain\SubdomainHomeController::class, 'show']);
+   Route::get('', [\App\Http\Controllers\Subdomain\SubdomainHomeController::class, 'index'])->name('index');
+   Route::get('{product:slug}', [\App\Http\Controllers\Subdomain\SubdomainHomeController::class, 'show'])->name('show');
+//       ->withoutScopedBindings();
 });
 
 Route::get('', \App\Http\Controllers\HomeController::class)->middleware('auth');

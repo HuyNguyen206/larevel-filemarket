@@ -22,7 +22,15 @@
                             {{ __('Products') }}
                         </x-nav-link>
                     </div>
+                    @if($user->subdomain)
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-nav-link :href="route('subdomain.index', $user)" :active="request()->routeIs('subdomain.home')">
+                                {{ __('Your marketplace') }}
+                            </x-nav-link>
+                        </div>
+                    @endif
                 @endif
+
 
             </div>
 
@@ -78,11 +86,21 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
-                    {{ __('Products') }}
-                </x-responsive-nav-link>
-            </div>
+            @if(($user = auth()->user()) && $user->stripe_account_enable)
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
+                        {{ __('Products') }}
+                    </x-nav-link>
+                </div>
+            @if($user->subdomain)
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('subdomain.index', $user)" :active="request()->routeIs('subdomain.home')">
+                            {{ __('Your marketplace') }}
+                        </x-nav-link>
+                    </div>
+            @endif
+
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

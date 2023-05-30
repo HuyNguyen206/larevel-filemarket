@@ -2,23 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Product extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
-
-    protected static function booted()
-    {
-      static::creating(function (Product $product){
-          $product->slug = Str::slug($product->title);
-      });
-    }
 
     public function user()
     {
@@ -36,5 +29,10 @@ class Product extends Model
     public function files()
     {
         return $this->hasMany(File::class);
+    }
+
+    public function scopeLive(Builder $builder)
+    {
+        $builder->where('live', true);
     }
 }
