@@ -16,7 +16,7 @@
         <ul>
             @forelse($products as $product)
                 <li>
-                    <a class="text-purple-800 font-semibold" href="{{route('subdomain.show', ['user' => $user, 'product' => $product])}}">{{$product->title}}</a>
+                    <a class="text-purple-800 font-semibold" href="{{route('subdomain.products.show', ['user' => $user, 'product' => $product])}}">{{$product->title}}</a>
                 </li>
             @empty
                 <li>

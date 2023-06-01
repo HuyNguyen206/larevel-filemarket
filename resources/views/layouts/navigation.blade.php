@@ -24,7 +24,7 @@
                     </div>
                     @if($user->subdomain)
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <x-nav-link :href="route('subdomain.index', $user)" :active="request()->routeIs('subdomain.home')">
+                            <x-nav-link :href="route('subdomain.products.index', $user)" :active="request()->routeIs('subdomain.home')">
                                 {{ __('Your marketplace') }}
                             </x-nav-link>
                         </div>
@@ -94,7 +94,7 @@
                 </div>
             @if($user->subdomain)
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('subdomain.index', $user)" :active="request()->routeIs('subdomain.home')">
+                        <x-nav-link :href="route('subdomain.products.index', $user)" :active="request()->routeIs('subdomain.home')">
                             {{ __('Your marketplace') }}
                         </x-nav-link>
                     </div>
