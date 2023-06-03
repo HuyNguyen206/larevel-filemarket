@@ -19,7 +19,7 @@ class OrderCompleted extends Notification implements ShouldQueue
      */
     public function __construct(public Sale $sale)
     {
-        $this->link = route('subdomain.material', [$sale->product->user->subdomain, $sale->id, 'token' => $sale->token, 'email' => $sale->email]);
+        $this->link = route('material', [$sale->id, 'token' => $sale->token, 'email' => $sale->email]);
     }
 
     /**

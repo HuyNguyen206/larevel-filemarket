@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Subdomain;
 
 use App\Http\Controllers\Controller;
+use App\Models\File;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\User;
@@ -70,7 +71,7 @@ class SubdomainHomeController extends Controller
         return redirect($response->url);
     }
 
-    public function showMaterial(Request $request, User $user, Sale $sale)
+    public function showMaterial(Request $request, Sale $sale)
     {
         if ($request->token !== $sale->token) {
             abort(Response::HTTP_BAD_REQUEST, 'The token is invalid');
@@ -80,6 +81,15 @@ class SubdomainHomeController extends Controller
             abort(Response::HTTP_BAD_REQUEST, 'The email is invalid');
         }
 
-        return view('subdomain.sale.show', ['product' => $sale->product, 'user' => $user]);
+        return view('sale.show', ['product' => $sale->product]);
+    }
+
+    public function downloadMaterial(Request $request, File $file)
+    {
+        if (!$request->hasValidSignature()) {
+            abort(Response::HTTP_FORBIDDEN, 'The signature is either incorrect or the link is expired already!');
+        }
+
+        return \response()->download(storage_path('app/'.$file->path));
     }
 }

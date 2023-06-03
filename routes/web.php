@@ -22,8 +22,10 @@ Route::domain('{user:subdomain}'.config('app.subdomain'))->name('subdomain.')->g
         Route::post('{product:slug}/checkout', [\App\Http\Controllers\Subdomain\SubdomainHomeController::class, 'checkout'])->name('checkout');
         Route::get("/{product:slug}/checkout/success", [\App\Http\Controllers\Subdomain\SubdomainHomeController::class, 'checkoutSuccess'])->name('checkout.success');
     });
-    Route::get('material/{sale}', [\App\Http\Controllers\Subdomain\SubdomainHomeController::class, 'showMaterial'])->name('material');
 });
+
+Route::get('material/{sale}', [\App\Http\Controllers\Subdomain\SubdomainHomeController::class, 'showMaterial'])->name('material');
+Route::get('material/download/{file:id}', [\App\Http\Controllers\Subdomain\SubdomainHomeController::class, 'downloadMaterial'])->name('material.download');
 
 Route::get('', \App\Http\Controllers\HomeController::class)->middleware('auth');
 Route::get('onboard', [\App\Http\Controllers\OnboardingStripeController::class, 'index'])

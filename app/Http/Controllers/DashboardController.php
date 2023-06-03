@@ -11,6 +11,9 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('dashboard');
+        $sale = $request->user()->load('sales.product')->loadCount('sales')->loadSum('sales', 'price');
+        $user = $request->user();
+
+        return view('dashboard', compact('sale', 'user'));
     }
 }
